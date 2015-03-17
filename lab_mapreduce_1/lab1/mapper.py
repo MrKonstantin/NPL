@@ -1,17 +1,14 @@
 #!/usr/local/bin/python3
-import json
+
 import sys
+import json
 
-result = {}
+
+def _map(key, value):
+	doc = json.loads(value)
+	topics = doc['topics']
+	for topic in topics:
+		print(topic)
+
 for line in sys.stdin:
-    doc = json.loads(line)
-    topics = doc['topics']
-
-    for topic in topics:
-        if topic in result.keys():
-            result[topic] += 1
-        else:
-            result[topic] = 1
-
-for topic in result.keys():
-    print(topic, result[topic], sep = ".....")
+	_map(None, line)
