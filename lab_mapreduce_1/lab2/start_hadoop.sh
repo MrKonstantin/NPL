@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar
-    -input input/lab2/*
+    -input input/lab_mapreduce_1/*
     -output output/lab2/allDocCount
     -mapper ~/projects/lab_mapreduce_1/lab2/mapper.py
     -reducer ~/projects/lab_mapreduce_1/lab2/mapper.py
