@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+hadoop fs -rm -R output/lab2/*
+
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -input input/lab_mapreduce_1/* \
     -output output/lab2/allDocCount \
