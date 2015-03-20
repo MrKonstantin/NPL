@@ -1,7 +1,8 @@
+#!/usr/local/bin/python3
 import sys
 
-total = 0
+total_doc = 0
 for line in sys.stdin:
-	total += int(float(line))
+	total_doc += int(float(line))
 
-print(total)
+print(total_doc)
