@@ -1,0 +1,1 @@
+create 'konstantin.kiselev', 'data', {NUMREGIONS => 21, SPLITALGO =>'HexStringSplit'}
