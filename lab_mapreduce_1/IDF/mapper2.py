@@ -3,7 +3,7 @@
 import sys
 import json
 
-
+# Разбираем по токенам
 def _map(key, doc):
 	tokens = set(doc['tokens'])
 	for token in tokens:

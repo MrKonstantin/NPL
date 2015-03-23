@@ -6,9 +6,11 @@ import math
 prev_token = None
 token_count = 0
 
+# Загружаем количество документов
 f = open('totalDoc')
 all_doc_count = float(f.read())
 
+# Расчитываем IDF для каждого токена
 for line in sys.stdin:
 	token, value = line.strip().split('\t')
 	value = int(float(value))
