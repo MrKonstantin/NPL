@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-hadoop fs -rm -r output/lab2/*
+hadoop fs -rm -r output/lab_mapreduce_1/IDF
+hadoop fs -rm -r output/lab_mapreduce_1/allDocCount
 
 # Расчет количества документов
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \

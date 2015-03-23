@@ -10,11 +10,11 @@ for line in sys.stdin:
 		split = line.strip().split('\t')
 		token = split[0]
 
-		if token is not None and token != prev['token'] and isinstance(prev, dict):
+		if prev is not None and token != prev['token'] and isinstance(prev, dict):
 			print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')
 			prev = {'token': token, 'idf': 0, 'docs': []}
 
-		if token is None:
+		if prev is None:
 			prev = {'token': token, 'idf': 0, 'docs': []}
 
 		if len(split) == 2:
