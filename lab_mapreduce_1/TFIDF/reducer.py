@@ -3,29 +3,30 @@
 import sys
 import json
 
-result = {}
+prev = None
 
 for line in sys.stdin:
-	split = line.strip().split('-----')
-	token = split[0]
-	if token not in result.keys():
-		result[token] = {}
+	try:
+		split = line.strip().split('\t')
+		token = split[0]
 
-	if len(split) == 2:
-		idf = split[1]
-		result[token]['idf'] = idf
-	else:
-		doc = {}
-		hash = split[1]
-		doc['tf'] = split[2]
-		doc['topics'] = split[3]
-		
-		if 'docs' in result[token]:
-			result[token]['docs'][hash] = doc
+		if token is not None and token != prev['token'] and isinstance(prev, dict):
+			print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')
+			prev = {'token': token, 'idf': 0, 'docs': []}
+
+		if token is None:
+			prev = {'token': token, 'idf': 0, 'docs': []}
+
+		if len(split) == 2:
+			idf = split[1]
+			prev['body']['idf'] = idf
 		else:
-			result[token]['docs'] = {}
-			result[token]['docs'][hash] = doc
+			doc = {}
+			doc['id']= split[1]
+			doc['tf'] = split[2]
+			doc['topics'] = split[3]
 
-for token in result.keys():
-	print(json.dumps({'token': token, 'body': result[token]}))
+			prev['docs'].add(doc)
 
+	except:
+		pass

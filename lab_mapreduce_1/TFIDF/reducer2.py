@@ -3,21 +3,17 @@
 import sys
 import json
 
-result = {}
+prev = (None, [], {})
 
 for line in sys.stdin:
-	obj = json.loads(line)
-	hash = obj['hash']
-	body = obj['body']
-	if hash in result.keys():
-		for token in body['tfidf'].keys():
-			result[hash]['tfidf'][token] = body['tfidf'][token]
-	else:
-		result[hash] = {}
-		result[hash]['tfidf'] = {}
-		result[hash]['topics'] = body['topics']
-		for token in body['tfidf'].keys():
-                        result[hash]['tfidf'][token] = body['tfidf'][token]
-			
-for doc in result.keys():
-	print(result[doc])
+	try:
+		doc_id, topics, token, tfidf = line.strip().split('\t')
+		if prev is None:
+			prev = (doc_id, topics, {token: tfidf})
+		elif prev[0] != doc_id:
+			print(prev)
+			prev = (doc_id, topics, {token: tfidf})
+		else:
+			prev[2][token] = tfidf
+	except:
+		pass
