@@ -3,18 +3,18 @@
 import sys
 import json
 
-prev = None
+prev = {'token': None, 'idf': 0, 'docs': []}
 
 for line in sys.stdin:
 	try:
 		split = line.strip().split('\t')
 		token = split[0]
 
-		if prev is not None and token != prev['token'] and isinstance(prev, dict):
+		if token != prev['token']:
 			print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')
 			prev = {'token': token, 'idf': 0, 'docs': []}
 
-		if prev is None:
+		if prev['token'] is None:
 			prev = {'token': token, 'idf': 0, 'docs': []}
 
 		if len(split) == 2:
