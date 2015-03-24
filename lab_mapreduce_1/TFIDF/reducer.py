@@ -9,11 +9,10 @@ for line in sys.stdin:
 	split = line.strip().split('\t')
 	token = split[0]
 
-	if prev['token'] is not None and token != prev['token']:
-		print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')
-		prev = {'token': token, 'idf': 0, 'docs': []}
-
 	if prev['token'] is None:
+		prev = {'token': token, 'idf': 0, 'docs': []}
+	elif token != prev['token']:
+		print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')
 		prev = {'token': token, 'idf': 0, 'docs': []}
 
 	if len(split) == 2:
@@ -22,3 +21,6 @@ for line in sys.stdin:
 	else:
 		doc = {'id': split[1], 'tf': split[2], 'topics': split[3]}
 		prev['docs'].append(doc)
+
+if prev['token'] is not None:
+	print(prev['token'], prev['idf'], json.dumps(prev['docs']), sep='\t')

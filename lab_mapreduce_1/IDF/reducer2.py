@@ -18,6 +18,9 @@ for line in sys.stdin:
 		token_count += value
 	else:
 		if token_count > 0:
-			print(token, math.log(all_doc_count/token_count))
+			print(prev_token, math.log(all_doc_count/token_count))
 		prev_token = token
 		token_count = value
+
+if token_count > 0:
+	print(prev_token, math.log(all_doc_count/token_count))
