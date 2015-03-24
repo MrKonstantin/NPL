@@ -3,7 +3,9 @@
 hadoop fs -rm -r output/lab_mapreduce_1/IDF
 hadoop fs -rm -r output/lab_mapreduce_1/allDocCount
 
-# Расчет количества документов && Расчет IDF
+# Расчет количества документов
+# && Расчет IDF
+# && Вывод первых строк результата в файл
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -Dmapreduce.job.reduces=1 \
     -input input/lab_mapreduce_1/data.json \
@@ -16,6 +18,4 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
     -output output/lab_mapreduce_1/IDF \
     -mapper ~/projects/lab_mapreduce_1/IDF/mapper2.py \
     -reducer ~/projects/lab_mapreduce_1/IDF/reducer2.py \
-
-# Вывод первых строк результата в файл
-hadoop fs -cat output/lab_mapreduce_1/IDF/* | head > head_result.dat
+&& hadoop fs -cat output/lab_mapreduce_1/IDF/* | head > head_result.dat
