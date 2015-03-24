@@ -1,1 +1,1 @@
-create 'konstantin.kiselev', 'data', {NUMREGIONS => 21, SPLITALGO =>'HexStringSplit'}
+create 'konstantin.kiselev', {NAME=>'data', VERSIONS=>2147483647}, {NUMREGIONS => 21, SPLITALGO =>'HexStringSplit'}
