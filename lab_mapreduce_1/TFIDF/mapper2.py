@@ -5,11 +5,11 @@ import json
 
 
 for line in sys.stdin:
-	try:
-		token, idf, docs = line.strip().split('\t')
-		docs = json.load(docs)
+	
+		token, idf, docs_str = line.strip().split('\t')
+		docs = json.loads(docs_str)
 
 		for doc in docs:
-			print(doc['id'], doc['topics'], token, idf * doc['tf'], sep='\t')
-	except:
-		pass
+			print(doc['id'], doc['topics'], token, float(idf) * float(doc['tf']), sep='\t')
+	
+	
