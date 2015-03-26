@@ -4,7 +4,8 @@ from sys import stdin
 
 prev = None
 count = 0
-for url in stdin:
+for line in stdin:
+	url = line.strip().split('\n')[0]
 	if prev is None:
 		count = 1
 		prev = url

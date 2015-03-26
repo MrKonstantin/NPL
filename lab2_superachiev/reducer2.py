@@ -2,10 +2,10 @@
 
 from sys import stdin
 
-count = 0
+n = 0
 for line in stdin:
-	count += 1
-	if count <= 350:
+	n += 1
+	if n <= 350:
 		count, url = line.strip().split('\t')
 		print(url, count, sep='\t')
 	else:
