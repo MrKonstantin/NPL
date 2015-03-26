@@ -3,5 +3,7 @@
 from sys import stdin
 
 for line in stdin:
-	uid, tmstp, url = line.strip().split('\t')
-	print(url)
+	split = line.strip().split('\t')
+	if len(split) == 3:
+		url = split[2]
+		print(url)
