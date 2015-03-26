@@ -7,6 +7,6 @@ for line in stdin:
 	n += 1
 	if n <= 350:
 		count, url = line.strip().split('\t')
-		print(url.join('\t').join(count))
+		print(url + '\t' + str(count))
 	else:
 		break

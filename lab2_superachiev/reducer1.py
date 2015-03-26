@@ -10,7 +10,7 @@ for line in stdin:
 		count = 1
 		prev = url
 	elif prev != url:
-		print(url.join('\t').join(count))
+		print(url + '\t' + str(count))
 		count = 1
 		prev = url
 	else:
