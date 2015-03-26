@@ -5,14 +5,15 @@ hadoop fs -rm -r output/lab_mapreduce_1/Centroid
 # Расчет количества посещений для каждого сайта
 # && Выборка ТОП350
 # && Вывод первых строк результата в файл
-hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-    -input output/lab_mapreduce_1/TFIDF/result/* \
-    -output output/lab_mapreduce_1/Centroid \
-    -mapper ~/projects/lab_mapreduce_1/Centroid/mapper1.py \
-    -reducer ~/projects/lab_mapreduce_1/Centroid/reducer1.py \
-&& hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
-    -input output/lab_mapreduce_1/TFIDF/result/* \
-    -output output/lab_mapreduce_1/Centroid \
-    -mapper ~/projects/lab_mapreduce_1/Centroid/mapper1.py \
-    -reducer ~/projects/lab_mapreduce_1/Centroid/reducer1.py \
-&& hadoop fs -cat output/lab_mapreduce_1/Centroid/* | head > head_result.dat
+hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
+        -file mapper.py \
+        -input s3n://newprolab/facetz_2015_02_0[1-5]\
+        -output user/mapreduce1 \
+        -mapper "python mapper1.py"
+        -reducer "python reducer1.py"\
+&& hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
+        -file mapper.py \
+        -input s3n://newprolab/facetz_2015_02_0[1-5]\
+        -output user/top350.txt \
+        -mapper "python mapper2.py"
+        -reducer "python reducer2.py"
