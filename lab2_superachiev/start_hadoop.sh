@@ -1,19 +1,20 @@
-#!/usr/bin/env bash
-
-hadoop fs -rm -r user/konstntin.kiselev/*
+hadoop fs -rm -r output/lab2_sa
+hadoop fs -mkdir output/lab2_sa
 
 # Расчет количества посещений для каждого сайта
 # && Выборка ТОП350
+# && Вывод первых строк результата в файл
 hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
-        -file mapper.py \
-        -input s3n://newprolab/facetz_2015_02_0[1-5]\
-        -output user/konstantin.kiselev/mapreduce1 \
-        -mapper "python mapper1.py"
+        -files mapper1.py,reducer1.py \
+        -input s3n://newprolab/facetz_2015_02_01/part-00006 \
+        -output output/lab2_sa/mapreduce1 \
+        -mapper "python mapper1.py" \
         -reducer "python reducer1.py"\
 && hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
         -Dmapreduce.job.reduces=1 \
-        -file mapper.py \
-        -input s3n://newprolab/facetz_2015_02_0[1-5]\
-        -output user/konstantin.kiselev/top350.txt \
-        -mapper "python mapper2.py"
-        -reducer "tac | python reducer2.py"
+        -files mapper2.py,reducer2.py \
+        -input output/lab2_sa/mapreduce1/* \
+        -output output/lab2_sa/top350.txt \
+        -mapper "python mapper2.py" \
+        -reducer "python reducer2.py" \
+&& hadoop fs -cat output/lab2_sa/top350.txt/* > head_top350.txt

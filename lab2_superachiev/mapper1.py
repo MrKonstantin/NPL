@@ -1,5 +1,4 @@
-#!/usr/local/bin/python3
-
+# Для каждой строки выдаем url
 from sys import stdin
 
 for line in stdin:
