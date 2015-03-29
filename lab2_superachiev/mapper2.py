@@ -1,8 +1,8 @@
-from sys import stdin
+import sys
 
 # Return (sort_key, count, url)
-for line in stdin:
+for line in sys.stdin:
 	url, count = line.strip().split('\t')
 	# Reverse the number
-	t = 999999999999 - int(count)
+	t = sys.maxint - int(count)
 	print(str(t) + '\t' + count + '\t' + url)
