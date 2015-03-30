@@ -1,4 +1,3 @@
-# Для каждой строки выдаем url
 from sys import stdin
 
 for line in stdin:

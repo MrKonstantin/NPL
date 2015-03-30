@@ -1,6 +1,5 @@
 from sys import stdin
 
-# Считаем количество url'ов. Return (url, количество)
 prev = None
 count = 0
 for line in stdin:
