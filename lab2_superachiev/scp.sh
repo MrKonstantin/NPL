@@ -1,0 +1,1 @@
+scp -i private.pem konstantin.kiselev@ec2-52-16-15-152.eu-west-1.compute.amazonaws.com:~/lab2_super_achieve/head_top350_file_1.dat .
