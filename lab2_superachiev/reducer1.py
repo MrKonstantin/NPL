@@ -13,3 +13,5 @@ for line in stdin:
 		prev = url
 	else:
 		count += 1
+
+print(prev + '\t' + str(count))
