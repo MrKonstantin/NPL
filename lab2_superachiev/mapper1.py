@@ -8,4 +8,4 @@ for line in stdin:
 
 	if len(split) == 3 and split[0] != '-':
 		url = split[2]
-		print(url)
+		print(url + '\t' + '1')
