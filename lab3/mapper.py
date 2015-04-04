@@ -4,9 +4,10 @@ import urllib
 import re
 
 for line in sys.stdin:
-	strip = line.strip().split('\t')
-	if len(strip) == 3 and strip[0] != '-':
-		url = urlparse(urllib.unquote(strip[2]).strip()).netloc.strip()
+	split = line.strip().split('\t')
+	if len(split) == 3 and split[0] != '-':
+		url = urlparse(urllib.unquote(split[2]).strip()).netloc.strip()
 		url = re.sub(r'^www\.', '', url)	
 		if len(url) > 0:
-			print(strip[0]+'\t'+url)
+			uid = split[0]
+			print '%s\t%s' % (uid, url)

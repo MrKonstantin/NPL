@@ -7,4 +7,6 @@ hadoop jar /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/hadoop-streaming.jar \
         -output output/lab3/lab3_users.txt \
         -mapper "python mapper.py" \
         -reducer "python reducer.py"\
-&& hadoop fs -cat output/lab3/lab3_users.txt/* | sort -nk1 > lab3_users.txt
+&& hadoop fs -cat output/lab3/lab3_users.txt/* | sort -nk1 > lab3users.txt \
+&& rm ../lab3users.txt \
+&& mv lab3users.txt ../.
