@@ -25,4 +25,4 @@ for line in sys.stdin:
 	if uid in auto:
 		is_auto = 1
 
-		print '%s\t%s' % (url, is_auto)
+	print '%s\t%s' % (url, is_auto)
